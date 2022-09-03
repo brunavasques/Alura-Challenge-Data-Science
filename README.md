@@ -1,6 +1,6 @@
 # Alura - Challenge Data Science
 
-Repository to keep track on [Data Science Challenge](https://www.alura.com.br/challenges/dados?host=https://cursos.alura.com.br) created by Alura.
+Repository to keep track of [Data Science Challenge](https://www.alura.com.br/challenges/dados?host=https://cursos.alura.com.br) created by Alura.
 
 Main goals are:
 * Week 1 - Data Processing: Understanding how to process data with SQL;
