@@ -31,9 +31,6 @@ With this data it is possible to link each person with its loan and bank history
 ### Task 3 - Analyze data types
 [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) was used to import and analyze data following [this article from Alura](https://www.alura.com.br/artigos/restaurar-backup-banco-de-dados-mysql).
 
-Query to create the database:
-`CREATE DATABASE analise_risco;`
-
 #### Table "dados_mutuarios":
 
 Table containing the personal data of each applicant.
@@ -81,36 +78,24 @@ Table containing the relationship between the other three tables.
 |`cb_id`| Bank history's ID. | text |
 
 ### Task 4 - Verify any inconsistency in data
+No inconsistency was found regarding the string pattern in string fields.
 
+Some observations:
+  * Some parameters have null/empty value.
   * The IDs are 16 size strings, but all the IDs have size of 13, and format XXXXXXXX-XXXX.
-    * `SELECT * FROM dados_mutuarios WHERE person_id NOT REGEXP '[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}'`;
-  * Some parameters have null value.
   * loan_status in "emprestimos" table is defined as int(11) but it assumes [0,1] values. Could be one bit.
-  * In some rows, loan_percent_income doesn't match loan_amnt/person_income.
-    * `SELECT dados_mutuarios.person_income, emprestimos.loan_amnt, emprestimos.loan_percent_income, emprestimos.loan_int_rate
-FROM dados_mutuarios
-    INNER JOIN ids ON dados_mutuarios.person_id = ids.person_id
-    INNER JOIN emprestimos ON ids.loan_id  = emprestimos.loan_id
-WHERE ROUND(emprestimos.loan_amnt/person_income,2) = emprestimos.loan_percent_income;`
   * IDs in the table "id" are defined as text, could be varchar(13).
-  
- Other verifications:
- * Duplicated entries:
-   * `SELECT person_id, COUNT(person_id)
-FROM dados_mutuarios
-GROUP BY person_id
-HAVING COUNT(person_id) > 1;`
- * IDs format:
-   * `SELECT * FROM dados_mutuarios WHERE person_id NOT REGEXP '[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}';`
+  * In some rows, loan_percent_income doesn't match loan_amnt/person_income.
 
 ### Task 5 - Correct the inconsistencies
+No corrections where needed.
 
 ### Task 6 - Join tables by ID
 
 `SELECT * FROM ids
 INNER JOIN dados_mutuarios d ON d.person_id = ids.person_id
 INNER JOIN emprestimos e ON e.loan_id = ids.loan_id
-INNER JOIN historicos_banco h ON h.cb_id = ids.cb_id;`
+INNER JOIN historicos_banco h ON h.cb_id = ids.cb_id;
 
 ### Task 7 - Translate columns from english to portuguese
 
