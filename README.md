@@ -95,7 +95,7 @@ No corrections where needed.
 `SELECT * FROM ids
 INNER JOIN dados_mutuarios d ON d.person_id = ids.person_id
 INNER JOIN emprestimos e ON e.loan_id = ids.loan_id
-INNER JOIN historicos_banco h ON h.cb_id = ids.cb_id;
+INNER JOIN historicos_banco h ON h.cb_id = ids.cb_id;`
 
 ### Task 7 - Translate columns from english to portuguese
 
